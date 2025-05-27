@@ -4,6 +4,8 @@ set "DB_USER=ecommerce_user"
 set "DB_NAME=ecommerce_db"
 set "TABLESPACE_NAME=ecommerce_ts"
 set "TABLESPACE_PATH=C:\pgsql_tablespaces\%TABLESPACE_NAME%"
+REM === IN DEV, ONE MUST USE .env OR CONFIG FILES OR environment variables  ===
+REM === IN PROD, ONE MUST USE DOCKER  ===
 set "PG_SUPERUSER=postgres"
 set "PGPASSWORD=password"
 set PGDATA=C:\Program Files\PostgreSQL\15\data

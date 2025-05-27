@@ -2,6 +2,8 @@
 
 #! UNIQUEMENT POUR LES MACOS
 
+#  IN DEV, ONE MUST USE .env OR CONFIG FILES OR environment variables  ===
+#  IN PROD, ONE MUST USE DOCKER  ===
 # Nom du rôle, de la base de données et du tablespace
 DB_USER="ecommerce_user"
 DB_NAME="ecommerce_db"
