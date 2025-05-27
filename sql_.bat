@@ -8,8 +8,6 @@ set "PG_SUPERUSER=postgres"
 set "PGPASSWORD=password"
 set PGDATA=C:\Program Files\PostgreSQL\15\data
 
-echo 🔐 Veuillez entrer le mot de passe pour l'utilisateur PostgreSQL %PG_SUPERUSER%:
-set /p POSTGRES_PASSWORD="Password: "
 
 REM === Vérification du service PostgreSQL ===
 echo 🧪 Vérification que le service PostgreSQL 15 est actif...
@@ -23,6 +21,8 @@ if errorlevel 1 (
 
 REM === Vérification ou création du rôle PostgreSQL ===
 echo 👤 Vérification ou création du rôle PostgreSQL "%DB_USER%"...
+echo 🔐 Veuillez entrer le mot de passe pour l'utilisateur PostgreSQL %PG_SUPERUSER%:
+
 psql -U %PG_SUPERUSER% -W -tAc "SELECT 1 FROM pg_roles WHERE rolname='%DB_USER%'" | findstr "1" >nul
 if errorlevel 1 (
     echo ➕ Création du rôle %DB_USER%...
@@ -34,6 +34,8 @@ if errorlevel 1 (
 
 REM === Vérification ou création de la base ===
 echo 🗂 Création de la base de données "%DB_NAME%"...
+echo 🔐 Veuillez entrer le mot de passe pour l'utilisateur PostgreSQL %PG_SUPERUSER%:
+
 psql -U %PG_SUPERUSER% -W -tAc "SELECT 1 FROM pg_database WHERE datname='%DB_NAME%'" | findstr "1" >nul
 if errorlevel 1 (
     echo ➕ Création de la base %DB_NAME%...
@@ -53,6 +55,8 @@ if not exist "%TABLESPACE_PATH%" (
 
 REM === Vérification ou création du tablespace ===
 echo 🛠 Création du tablespace PostgreSQL "%TABLESPACE_NAME%"...
+echo 🔐 Veuillez entrer le mot de passe pour l'utilisateur PostgreSQL %PG_SUPERUSER%:
+
 psql -U %PG_SUPERUSER% -W -tAc "SELECT 1 FROM pg_tablespace WHERE spcname='%TABLESPACE_NAME%'" | findstr "1" >nul
 if errorlevel 1 (
     echo ➕ Création du tablespace...
@@ -62,7 +66,10 @@ if errorlevel 1 (
 )
 
 REM === Connexion finale pour vérification ===
+
 echo ✅ Connexion à la base "%DB_NAME%" avec l'utilisateur "%DB_USER%"...
+echo 🔐 Veuillez entrer le mot de passe pour l'utilisateur PostgreSQL %DB_USER%:
+
 psql -U %DB_USER% -d %DB_NAME% -c "\l"
 
 echo 🎉 Script terminé avec succès.
